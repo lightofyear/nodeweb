@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <title> <%=data.title%> </title>
+</head>
+<body>
+    <div class="wrap" style="text-align: center">
+        <div class="autinfo">
+            <img src="<%=data.uid.hpic%>" alt="作者头像" width="80" height="80">
+            <div style="display: inline-block"><%='作者 : '+data.uid.username+'    类型 : '+data.tips  %> </div>
+        </div>
+        <div class="content">
+            <%=data.content%>
+        </div>
+        <div class="artother">
+            发表时间: <%=data.created.toLocaleString()%>
+        </div>
+        <hr>
+        <ul class="pl">
+            <%for(let i of data1){%>
+                <li>
+                    <img src="<%= i.uid.hpic%>" alt="头像" width="60" height="60"/>
+                        <p> 发言人: <%= i.uid.username%> </p>
+                        <p>内容: <%= i.content%></p>
+                        <p>时间 : <%= i.uid.created.toLocaleString()%> </p>
+                </li>
+            <%}%>
+
+        </ul>
+        <h1>共有 <%= data.commentnum %> 条评论</h1>
+        <%if(!session.isNew){%>
+        <div class="pl">
+            <form action="/comment/<%=data._id%>" method="post">
+                <textarea name="content" id="" cols="30" rows="10">em em em....</textarea>
+                <input type="submit" value="提交">
+            </form>
+        </div>
+        <%}else {%>
+            <div>
+                <a href="/user/login">点击此处登录,即可参与评论</a>
+            </div>
+        <%}%>
+
+    </div>
+</body>
+</html>

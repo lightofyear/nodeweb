@@ -1,0 +1,22 @@
+.body{
+    margin: 0 auto 2rem;
+    width: 80%;
+    height: 20rem;
+}
+.body .btns{
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+.body .btns .btn{
+    justify-content: space-between;
+    width: 8rem;
+    letter-spacing:1rem;
+    text-indent: 1rem;
+}
+.body .alert{
+    text-align: center;
+}
+.body .alert input{
+    width: 70%;
+}
