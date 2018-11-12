@@ -86,12 +86,9 @@ Xm.find({username},(err,data)=>{
     }
 });
 
-// let port = 80,
-//     host = '0.0.0.0';
-// app.listen(port,host,()=>{
-//     console.log('success');
-// });
-app.listen(3004,()=>{
+let port = 80,
+    host = '0.0.0.0';
+app.listen(port,host,()=>{
     console.log('success');
 });
 
