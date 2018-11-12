@@ -21,6 +21,7 @@
             <div class="header alert alert-dark">
                 <ul  class="nav nav-tabs">
                     <li role="presentation"><a href="/">首页</a></li>
+                    <li role="presentation" id="llin">llin鞋区</li>
                     <li role="presentation"><a href="/music">音乐区</a></li>
                     <li role="presentation"><a href="/article">文章区</a></li>
                     <%if(!isNew){%>
@@ -33,29 +34,30 @@
 
                 </ul>
             </div>
-            <div class="body">
-                <div class="login">
-                    <form action="http://localhost:3004/user/login" method="post">
-                        <div class="alert alert-secondary" role="alert">
-                            用户名 ：<input type="text" name="usn" placeholder="请输入用户名" >
-                        </div>
-                        <div class="alert alert-secondary" role="alert">
-                            密 &nbsp;码 ： <input type="password" placeholder="请输入密码" name="psw" >
-                        </div>
-                        <div class="btns">
-                            <input type="submit" value="确定"  class="btn btn-primary sure">
-                            <!--<input type="button" value="确定"  class="btn btn-primary sure">-->
-                            <a href="http://localhost/user/reg">
-                                <input type="button" value="注册"  class="btn btn-primary">
-                            </a>
-                            <input type="reset" value="重置"  class="btn btn-primary">
-                        </div>
-                    </form>
-                </div>
-            </div>
+            <!--<div class="body">-->
+                <!--<div class="login">-->
+                    <!--<form action="http://localhost:3004/user/login" method="post">-->
+                        <!--<div class="alert alert-secondary" role="alert">-->
+                            <!--用户名 ：<input type="text" name="usn" placeholder="请输入用户名" >-->
+                        <!--</div>-->
+                        <!--<div class="alert alert-secondary" role="alert">-->
+                            <!--密 &nbsp;码 ： <input type="password" placeholder="请输入密码" name="psw" >-->
+                        <!--</div>-->
+                        <!--<div class="btns">-->
+                            <!--<input type="submit" value="确定"  class="btn btn-primary sure">-->
+                            <!--&lt;!&ndash;<input type="button" value="确定"  class="btn btn-primary sure">&ndash;&gt;-->
+                            <!--<a href="http://localhost/user/reg">-->
+                                <!--<input type="button" value="注册"  class="btn btn-primary">-->
+                            <!--</a>-->
+                            <!--<input type="reset" value="重置"  class="btn btn-primary">-->
+                        <!--</div>-->
+                    <!--</form>-->
+                <!--</div>-->
+            <!--</div>-->
             <div class="footer">
                 <%if(!isNew){%>
                 <img src="<%= session.hpic %>" alt="头像" width="80" height="80">
+                <button id="btn">post测试</button>
                 <%}%>
             </div>
         </div>
@@ -66,5 +68,5 @@
 <script src="js/rem.js"></script>
 <script src="js/popper.js"></script>
 <script src="js/bootstrap.min.js"></script>
-<!--<script src="js/index   .js"></script>-->
+<script src="js/index.js"></script>
 </html>

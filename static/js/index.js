@@ -18,5 +18,31 @@
 //         })
 //     }
 // };
+//
+!function (){
+    let linSrc = 'http://localhost:3000/',
+        llin = $('#llin')[0];
+    llin.onclick = function () {
+        window.location.href = linSrc;
+        console.log(1111111);
+    };
 
-console.log($('.sure'));
+}();
+!function (){ //post方式处理的api测试
+   let btn = $('#btn')[0];
+   console.log(btn);
+    if(!btn){
+        return;
+    }
+    else{}
+   btn.onclick = (e)=>{
+       $.ajax({
+         url : '/handle/select',
+         method : 'post',
+         data: {username : '123' },
+         success : (data)=>{ console.log(data)}
+       })
+   }
+
+}();
+

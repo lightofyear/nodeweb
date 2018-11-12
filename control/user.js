@@ -14,10 +14,17 @@ exports.reg = async (ctx) => {
         username = reg.usn,
         password = reg.psw,
         email = reg.eml,
-        articlenum = 0,
-        commentnum = 0;
-    // console.log(userSchema);
+        code = reg.code,
+        cryptoCode = reg.cryCode,
+        articlenum = 0;
 
+    if(cryptoCode !== crypto(code,code)){
+        ctx.body = {
+            status: 405,
+            msg: '验证码和邮箱不匹配!'
+        };
+        return;
+    }
     // 1.查询数据库  异步操作 await后面加promise对象
     await new Promise((res,rej)=>{
 
@@ -36,7 +43,6 @@ exports.reg = async (ctx) => {
                      password,
                      email,
                      articlenum,
-                     commentnum
                  });
                  xm.save((err,data)=>{
                      err ?  rej(err): res(data);
@@ -46,9 +52,6 @@ exports.reg = async (ctx) => {
 
     })
         .then(async (data)=>{
-            // console.log(222222);
-            // console.log(!!data[0]);
-            // console.log(data);
             const usn = crypto(username,'123');
            if(data){
                ctx.cookies.set("username",usn,{
@@ -154,7 +157,6 @@ exports.login = async (ctx) => {
     })
         .then(async (data)=>{
             if(!data){
-
              await ctx.redirect("/",{
                     session:{
                         role:666
@@ -181,6 +183,10 @@ exports.login = async (ctx) => {
             ctx.body = msg;
             console.log(err);
         })
+
+};
+
+exports.reset = async (ctx)=>{
 
 };
 

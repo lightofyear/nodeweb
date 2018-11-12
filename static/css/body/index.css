@@ -1,8 +1,10 @@
+
 .body{
     margin: 0 auto 2rem;
     width: 80%;
     height: 20rem;
 }
+
 .body .btns{
     display: flex;
     justify-content: space-around;

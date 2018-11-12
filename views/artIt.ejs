@@ -22,18 +22,26 @@
             发表时间: <%=data.created.toLocaleString()%>
         </div>
         <hr>
-        <ul class="pl">
-            <%for(let i of data1){%>
+        <ul class="comments">
+            <%let o = 0; for(let i of data1){%>
                 <li>
                     <img src="<%= i.uid.hpic%>" alt="头像" width="60" height="60"/>
-                        <p> 发言人: <%= i.uid.username%> </p>
-                        <p>内容: <%= i.content%></p>
-                        <p>时间 : <%= i.uid.created.toLocaleString()%> </p>
+                    <p> 发言人: <%= i.uid.username%> </p>
+                    <p>内容: <%= i.content%></p>
+                    <p>时间 : <%= i.uid.created.toLocaleString()%> </p>
+                <%if(session.role.length > 4 ){ %>
+                    <button href="/comment/del/<%=i._id%>">删除<%=++o%></button>
+                <%}%>
                 </li>
             <%}%>
 
         </ul>
-        <h1>共有 <%= data.commentnum %> 条评论</h1>
+        <%if(data.commentnum){%>
+            <h1>共有 <%= data.commentnum %> 条评论</h1>
+        <%}else {%>
+            <h1>目前尚未有评论!</h1>
+        <%}%>
+
         <%if(!session.isNew){%>
         <div class="pl">
             <form action="/comment/<%=data._id%>" method="post">
@@ -41,6 +49,15 @@
                 <input type="submit" value="提交">
             </form>
         </div>
+            <%for(i in session){%>
+                <%= i+' : '%>
+                <%- session[i]+'<br/>'%>
+            <%}%>
+        <%= _id%>
+        <%if(session.role.length > 4 ){ %>
+            <a href="/article/del/<%=_id%>">删除</a>
+        <%}%>
+
         <%}else {%>
             <div>
                 <a href="/user/login">点击此处登录,即可参与评论</a>
@@ -49,4 +66,6 @@
 
     </div>
 </body>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/artIt.js"></script>
 </html>

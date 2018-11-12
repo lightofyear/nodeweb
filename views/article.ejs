@@ -35,6 +35,9 @@
 
                     <input type="hidden" value="<%= data[i].uid._id %>">
                     <input type="hidden" value="<%= data[i].uid.created.toLocaleString()%>">
+                    <%if(session.role.length>4){%>
+                    <a href="/article/del/<%= data[i]._id%>">删除</a>
+                    <%}%>
                 </li>
                 <% }%>
             </ul>

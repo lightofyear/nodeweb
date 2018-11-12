@@ -93,10 +93,10 @@ exports.getList =  async (ctx)=>{
 
 exports.getIt = async (ctx)=>{
 
-    // if(ctx.session.isNew){
-    //     await  ctx.redirect('/user/login');
-    //     return;
-    // }
+    if(ctx.session.isNew){
+        await  ctx.redirect('/user/login');
+        return;
+    }
 
     let _id = ctx.params.id;
     // console.log(_id);
@@ -118,15 +118,89 @@ exports.getIt = async (ctx)=>{
         .sort('_created')
         .then( async data => data)
         .catch(err => {throw err});
-
-    console.log(data1);
    if(data){
        // console.log(data);
        await ctx.render('artit',{
            session: ctx.session,
            data,
-           data1
+           data1,
+           _id
        });
    }
 
+};
+
+exports.delIt = async (ctx)=>{
+
+    if(ctx.session.isNew && ctx.session.role.length <4){
+        await  ctx.redirect('/user/login');
+        ctx.render('go404',{
+            content:'页面不存在!'
+        });
+        return ;
+    }
+    let _id = ctx.params.aid ;
+
+    //通过文章id 查找
+    let data = await new Promise((res,rej)=>{
+        aS.find({_id},{uid:1,commentnum:1},(err,data)=>{
+            if(err){
+                rej(err)
+            }
+            else{
+                if(data.length){
+                    res(data[0]);
+                }
+
+            }
+        });
+    }).then(data => data)
+        .catch(err => err);
+
+    let data1 = await new Promise((res,rej)=>{
+
+        uS.updateOne({_id:data.uid},{$inc:{articlenum:-1}},(err)=>{
+            if(err){
+                rej(err) ;
+            }
+            else{
+                res('文章数更新成功');
+            }
+        })
+    })
+        .catch(err=>err)
+        .then(data=>data);
+    console.log(data1);
+    console.log(data);
+    if(data.commentnum >0){
+        let data2 = await new Promise((res,rej)=>{
+            cS.deleteMany({aid:_id},(err)=>{
+                if(err){
+                    rej(err) ;
+                }
+                else{
+                    res('文章评论删除成功');
+                }
+            })
+        })
+            .catch(err=>err)
+            .then(data=>data);
+        console.log(data2);
+    }
+
+    let data3 = await new Promise((res,rej)=>{
+             aS.deleteOne({_id},async (err)=>{
+
+                if(err){
+                   rej(err);
+                }
+                else {
+                    res('文章删除成功');
+                }
+            });
+    })
+    ;
+    console.log(data3);
+
+    await  ctx.redirect('/article');
 };

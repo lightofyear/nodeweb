@@ -25,15 +25,22 @@
     <h1 class="h3 mb-3 font-weight-normal">Please <%= show ? 'Sign' : 'Login'; %> in</h1>
 
     <label for="inputnName" class="sr-only">User name</label>
-    <input type="text" name="usn" id="inputnName" class="form-control" placeholder="Username" required="" autofocus="">
+    <input type="text" name="usn" id="inputnName" class="form-control" placeholder="input Username" required autofocus>
 
     <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" name="psw" id="inputPassword" class="form-control" placeholder="Password"  autocomplete=’tel’>
+    <input type="password" name="psw" id="inputPassword" class="form-control" placeholder="input Password" required >
     <% if (show){%>
     <label for="inputPassword" class="sr-only">sure your Password</label>
-    <input type="password" class="form-control" placeholder="rePassword" required="">
+    <input type="password" class="form-control" placeholder="sure your Password" required>
     <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="email" name="eml" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+    <input type="email" name="eml" id="inputEmail" class="form-control" placeholder="your Email address" required>
+    <input type="hidden" name="cryCode" id="crypto"/>
+    <div>
+        <input type="text" name="code" id="code" class="form-control" placeholder="" disabled style="width: 200px;display: inline-block;" required>
+        <button class="getc btn-primary btn-block" type="button" style="width: 80px;display: inline-block;vertical-align: middle">点击获取验证码</button>
+    </div>
+
+
     <% } if (!show){%>
     <% %>
     <div class="checkbox" >
@@ -42,13 +49,19 @@
         </label>
     </div>
     <% } %>
-    <button class="btn btn-lg btn-primary btn-block" type="submit">
-        <%= show ? 'Sign' : 'Login'; %> in
-    </button>
+    <%if(!show){%>
+    <i class="btn btn-primary btn-block" login="<%= true; %>" >
+        login in
+    </i>
+    <%}%>
+    <button class="btn btn-primary btn-block" type="submit" style="<%=!show&&'display: none'%>">Sign in</button>
 </form>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/popper.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+<script src="../js/logins.js">
+
+</script>
 
 </body>
 </body>

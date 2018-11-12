@@ -12,8 +12,10 @@ const  userSchema = new Schema({
         type : String,
         default : '/imgs/default/default.jpg'
     },
-    articlenum: Number,
-    commentnum: Number,
+    articlenum: {
+        type: Number,
+        default : 0
+    },
 },{
     versionKey:false,
     timestamps:{

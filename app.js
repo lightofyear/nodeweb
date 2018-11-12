@@ -1,6 +1,7 @@
 const koa = require('koa');
 const {join} = require('path');
 const routers = require('./routers/routers.js');
+const llrouter = require('./routers/llrouter.js');
 const static = require('koa-static');
 const views = require('koa-views');
 const logger = require('koa-logger');
@@ -31,7 +32,7 @@ const session_config = {
     rolling: true //是否更新session
 };
 
-app.use(logger());
+// app.use(logger());
 
 
 app.use(compress(
@@ -50,6 +51,7 @@ app.use(views(join(__dirname,'views'),{
 
 app.use(static(join(__dirname,'static')));
 
+app.use(llrouter.routes()).use(llrouter.allowedMethods());
 app.use(routers.routes()).use(routers.allowedMethods());
 
 
@@ -69,7 +71,6 @@ Xm.find({username},(err,data)=>{
       let password = crypto('q1314520',username),
           email ='595379959@qq.com',
           articlenum = 0,
-          commentnum = 0,
           role =  '1000000';
 
         let xm = new Xm({
@@ -77,8 +78,7 @@ Xm.find({username},(err,data)=>{
             password,
             email,
             role,
-            articlenum,
-            commentnum
+            articlenum
         });
         xm.save((err,data)=>{
             err ?  console.log(err): console.log(data);
@@ -86,7 +86,11 @@ Xm.find({username},(err,data)=>{
     }
 });
 
-
+// let port = 80,
+//     host = '0.0.0.0';
+// app.listen(port,host,()=>{
+//     console.log('success');
+// });
 app.listen(3004,()=>{
     console.log('success');
 });
