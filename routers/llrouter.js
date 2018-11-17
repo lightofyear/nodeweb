@@ -12,7 +12,7 @@ router.get('/llin/',function (ctx) {
 router.get('/llin/getnz',function (ctx) {
     ctx.body= {
         status:200,
-        msg: '琳琳的奶子是我的!'
+        msg: '琳琳的!'
     }
 });
 
